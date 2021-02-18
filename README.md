@@ -8,23 +8,7 @@
 
 ![CMake](https://github.com/ruguevara/star-ultra/workflows/CMake/badge.svg)
 
-
-## C++ Starter Template Getting Started
-
-### Remove frameworks you're not going to use
-
-If you know you're not going to use one or more of the optional gui/graphics
-frameworks (fltk, gtkmm, imgui, etc.), you can remove them with `git rm`:
-
-    $ git rm -r src/<unnecessary_framework>
-
-## Dependencies
-
-Note about install commands:
-
-- for Windows, we use [choco](https://chocolatey.org/install).
-- for MacOS, we use [brew](https://brew.sh/).
-- In case of an error in cmake, make sure that the dependencies are on the PATH.
+## Getting Started
 
 ### Necessary Dependencies
 
@@ -33,212 +17,174 @@ See [cppreference.com](https://en.cppreference.com/w/cpp/compiler_support)
 to see which features are supported by each compiler.
 The following compilers should work:
 
-  * [gcc 7+](https://gcc.gnu.org/)
-	<details>
-	<summary>Install command</summary>
+* [gcc 7+](https://gcc.gnu.org/)
+    <details>
+    <summary>Install command</summary>
+    - Debian/Ubuntu:
+        sudo apt install build-essential
 
-	- Debian/Ubuntu:
+    - Windows:
+        choco install mingw -y
 
-			sudo apt install build-essential
+    - MacOS:
+        brew install gcc
+    </details>
 
-	- Windows:
+* [clang 6+](https://clang.llvm.org/)
+    <details>
+    <summary>Install command</summary>
+    - Debian/Ubuntu:
+        bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
-			choco install mingw -y
+    - Windows:
 
-	- MacOS:
+        Visual Studio 2019 ships with LLVM (see the Visual Studio section). However, to install LLVM separately:
 
-			brew install gcc
-	</details>
+            choco install llvm -y
 
-  * [clang 6+](https://clang.llvm.org/)
-	<details>
-	<summary>Install command</summary>
+        llvm-utils for using external LLVM with Visual Studio generator:
 
-	- Debian/Ubuntu:
+            git clone https://github.com/zufuliu/llvm-utils.git
+            cd llvm-utils/VS2017
+            .\install.bat
 
-			bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-
-	- Windows:
-
-		Visual Studio 2019 ships with LLVM (see the Visual Studio section). However, to install LLVM separately:
-
-			choco install llvm -y
-
-		llvm-utils for using external LLVM with Visual Studio generator:
-
-			git clone https://github.com/zufuliu/llvm-utils.git
-			cd llvm-utils/VS2017
-			.\install.bat
-
-	- MacOS:
-
-			brew install llvm
-	</details>
+    - MacOS:
+            brew install llvm
+    </details>
 
   * [Visual Studio 2019 or higher](https://visualstudio.microsoft.com/)
-	<details>
-	<summary>Install command + Environment setup</summary>
+    <details>
+    <summary>Install command + Environment setup</summary>
 
-	On Windows, you need to install Visual Studio 2019 because of the SDK and libraries that ship with it.
+    On Windows, you need to install Visual Studio 2019 because of the SDK and libraries that ship with it.
 
-  	Visual Studio IDE - 2019 Community (installs Clang too):
+      Visual Studio IDE - 2019 Community (installs Clang too):
 
-  	  	choco install -y visualstudio2019community --package-parameters "add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --includeOptional --passive --locale en-US"
+            choco install -y visualstudio2019community --package-parameters "add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --includeOptional --passive --locale en-US"
 
-	Put MSVC compiler, Clang compiler, and vcvarsall.bat on the path:
+    Put MSVC compiler, Clang compiler, and vcvarsall.bat on the path:
 
-			choco install vswhere -y
-			refreshenv
+            choco install vswhere -y
+            refreshenv
 
-			# change to x86 for 32bit
-			$clpath = vswhere -products * -latest -prerelease -find **/Hostx64/x64/*
-			$clangpath = vswhere -products * -latest -prerelease -find **/Llvm/bin/*
-			$vcvarsallpath =  vswhere -products * -latest -prerelease -find **/Auxiliary/Build/*
+            # change to x86 for 32bit
+            $clpath = vswhere -products * -latest -prerelease -find **/Hostx64/x64/*
+            $clangpath = vswhere -products * -latest -prerelease -find **/Llvm/bin/*
+            $vcvarsallpath =  vswhere -products * -latest -prerelease -find **/Auxiliary/Build/*
 
-			$path = [System.Environment]::GetEnvironmentVariable("PATH", "User")
-			[Environment]::SetEnvironmentVariable("Path", $path + ";$clpath" + ";$clangpath" + ";$vcvarsallpath", "User")
-			refreshenv
+            $path = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+            [Environment]::SetEnvironmentVariable("Path", $path + ";$clpath" + ";$clangpath" + ";$vcvarsallpath", "User")
+            refreshenv
 
-	</details>
-
+    </details>
 
 2. [Conan](https://conan.io/)
-	<details>
-	<summary>Install Command</summary>
+    <details>
+    <summary>Install Command</summary>
 
-	- Via pip - https://docs.conan.io/en/latest/installation.html#install-with-pip-recommended
+    - Via pip - https://docs.conan.io/en/latest/installation.html#install-with-pip-recommended
 
-			pip install --user conan
+            pip install --user conan
 
-	- Windows:
+    - Windows:
 
-			choco install conan -y
+            choco install conan -y
 
-	- MacOS:
+    - MacOS:
 
-			brew install conan
+            brew install conan
 
-	</details>
+    </details>
 
 3. [CMake 3.15+](https://cmake.org/)
-	<details>
-	<summary>Install Command</summary>
+    <details>
+    <summary>Install Command</summary>
 
-	- Debian/Ubuntu:
+    - Debian/Ubuntu:
 
-			sudo apt-get install cmake
+            sudo apt-get install cmake
 
-	- Windows:
+    - Windows:
 
-			choco install cmake -y
+            choco install cmake -y
 
-	- MacOS:
+    - MacOS:
 
-			brew install cmake
+            brew install cmake
 
-	</details>
+    </details>
 
 ### Optional Dependencies
+
 #### C++ Tools
   * [Doxygen](http://doxygen.nl/)
-	<details>
-	<summary>Install Command</summary>
+    <details>
+    <summary>Install Command</summary>
 
-	- Debian/Ubuntu:
+    - Debian/Ubuntu:
 
-			sudo apt-get install doxygen
-			sudo apt-get install graphviz
+            sudo apt-get install doxygen
+            sudo apt-get install graphviz
 
-	- Windows:
+    - Windows:
 
-			choco install doxygen.install -y
-			choco install graphviz -y
+            choco install doxygen.install -y
+            choco install graphviz -y
 
-	- MacOS:
+    - MacOS:
 
-			brew install doxygen
-	 		brew install graphviz
+            brew install doxygen
+            brew install graphviz
 
-	</details>
+    </details>
 
 
   * [ccache](https://ccache.dev/)
-	<details>
-	<summary>Install Command</summary>
+    <details>
+    <summary>Install Command</summary>
 
-	- Debian/Ubuntu:
+    - Debian/Ubuntu:
 
-			sudo apt-get install ccache
+            sudo apt-get install ccache
 
-	- Windows:
+    - Windows:
 
-			choco install ccache -y
+            choco install ccache -y
 
-	- MacOS:
+    - MacOS:
 
-			brew install ccache
+            brew install ccache
 
-	</details>
+    </details>
 
 
   * [Cppcheck](http://cppcheck.sourceforge.net/)
-	<details>
-	<summary>Install Command</summary>
+    <details>
+    <summary>Install Command</summary>
 
-	- Debian/Ubuntu:
+    - Debian/Ubuntu:
 
-			sudo apt-get install cppcheck
+            sudo apt-get install cppcheck
 
-	- Windows:
+    - Windows:
 
-			choco install cppcheck -y
+            choco install cppcheck -y
 
-	- MacOS:
+    - MacOS:
 
-			brew install cppcheck
+            brew install cppcheck
 
-	</details>
-
-
-  * [include-what-you-use](https://include-what-you-use.org/)
-	<details>
-	<summary>Install Command</summary>
-
-	Follow instructions here:
-	https://github.com/include-what-you-use/include-what-you-use#how-to-install
-	</details>
-
-#### GUI libraries
-This project can be made to work with several optional GUI frameworks.
-
-If desired, you should install the following optional dependencies as
-directed by their documentation, linked here:
-
-- [FLTK](https://www.fltk.org/doc-1.4/index.html)
-- [GTKMM](https://www.gtkmm.org/en/documentation.html)
-- [QT](https://doc.qt.io/)
-
-The following dependencies can be downloaded automatically by CMake and Conan.
-All you need to do to install them is to turn on a CMake flag during
-configuration.
-If you run into difficulty using them, please refer to their documentation,
-linked here:
-
-- [NANA](http://nanapro.org/en-us/documentation/)
-- [SDL](http://wiki.libsdl.org/FrontPage)
-- [IMGUI](https://github.com/ocornut/imgui/tree/master/docs):
-  This framework depends on SFML, and if you are using Linux, you may need
-  to install several of SFML's dependencies using your package manager. See
-  [the SFML build tutorial](https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php)
-  for specifics.
+    </details>
 
 ## Build Instructions
 
 ### Build directory
+
 Make a build directory:
 ```
 mkdir build
 ```
+
 ### Specify the compiler using environment variables
 
 By default (if you don't set environment variables `CC` and `CXX`), the system default compiler will be used.
@@ -252,66 +198,66 @@ CMake will detect which compiler was used to build each of the Conan targets. If
 
 - Debian/Ubuntu/MacOS:
 
-	Set your desired compiler (`clang`, `gcc`, etc):
+    Set your desired compiler (`clang`, `gcc`, etc):
 
-	- Temporarily (only for the current shell)
+    - Temporarily (only for the current shell)
 
-		Run one of the followings in the terminal:
+        Run one of the followings in the terminal:
 
-		- clang
+        - clang
 
-				CC=clang CXX=clang++
+                CC=clang CXX=clang++
 
-		- gcc
+        - gcc
 
-				CC=gcc CXX=g++
+                CC=gcc CXX=g++
 
-	- Permanent:
+    - Permanent:
 
-		Open `~/.bashrc` using your text editor:
+        Open `~/.bashrc` using your text editor:
 
-			gedit ~/.bashrc
+            gedit ~/.bashrc
 
-		Add `CC` and `CXX` to point to the compilers:
+        Add `CC` and `CXX` to point to the compilers:
 
-			export CC=clang
-			export CXX=clang++
+            export CC=clang
+            export CXX=clang++
 
-		Save and close the file.
+        Save and close the file.
 
 - Windows:
 
-	- Permanent:
+    - Permanent:
 
-		Run one of the followings in PowerShell:
+        Run one of the followings in PowerShell:
 
-		- Visual Studio generator and compiler (cl)
+        - Visual Studio generator and compiler (cl)
 
-				[Environment]::SetEnvironmentVariable("CC", "cl.exe", "User")
-				[Environment]::SetEnvironmentVariable("CXX", "cl.exe", "User")
-				refreshenv
+                [Environment]::SetEnvironmentVariable("CC", "cl.exe", "User")
+                [Environment]::SetEnvironmentVariable("CXX", "cl.exe", "User")
+                refreshenv
 
-		  Set the architecture using [vsvarsall](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=vs-2019#vcvarsall-syntax):
+          Set the architecture using [vsvarsall](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=vs-2019#vcvarsall-syntax):
 
-				vsvarsall.bat x64
+                vsvarsall.bat x64
 
-		- clang
+        - clang
 
-				[Environment]::SetEnvironmentVariable("CC", "clang.exe", "User")
-				[Environment]::SetEnvironmentVariable("CXX", "clang++.exe", "User")
-				refreshenv
+                [Environment]::SetEnvironmentVariable("CC", "clang.exe", "User")
+                [Environment]::SetEnvironmentVariable("CXX", "clang++.exe", "User")
+                refreshenv
 
-		- gcc
+        - gcc
 
-				[Environment]::SetEnvironmentVariable("CC", "gcc.exe", "User")
-				[Environment]::SetEnvironmentVariable("CXX", "g++.exe", "User")
-				refreshenv
+                [Environment]::SetEnvironmentVariable("CC", "gcc.exe", "User")
+                [Environment]::SetEnvironmentVariable("CXX", "g++.exe", "User")
+                refreshenv
 
 
   - Temporarily (only for the current shell):
 
-			$Env:CC="clang.exe"
-			$Env:CXX="clang++.exe"
+            $Env:CC="clang.exe"
+            $Env:CXX="clang++.exe"
 
 </details>
 
@@ -380,6 +326,7 @@ Choose "Visual Studio 16 2019" as the generator. To tell Visual studio to use `c
 ![generate](https://user-images.githubusercontent.com/16418197/82781591-c97feb80-9e1f-11ea-86c8-f2748b96f516.png)
 
 #### **Configure via ccmake**:
+
 with the Cmake Curses Dialog Command Line tool:
 
     ccmake -S . -B ./build
@@ -388,6 +335,7 @@ Once `ccmake` has finished setting up, press 'c' to configure the project,
 press 'g' to generate, and 'q' to quit.
 
 ### Build
+
 Once you have selected all the options you would like to use, you can build the
 project (all targets):
 
@@ -400,6 +348,7 @@ For Visual Studio, give the build configuration (Release, RelWithDeb, Debug, etc
 ## Troubleshooting
 
 ### Update Conan
+
 Many problems that users have can be resolved by updating Conan, so if you are
 having any trouble with this project, you should start by doing that.
 
@@ -453,6 +402,7 @@ earlier version of `fmt`, such as `fmt/6.0.0`, and then run:
 version of `fmt`.
 
 ## Testing
+
 See [Catch2 tutorial](https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md)
 
 ## Fuzz testing
