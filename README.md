@@ -1,27 +1,18 @@
-# cpp_starter_project
+# Star Ultra
 
-[![codecov](https://codecov.io/gh/lefticus/cpp_starter_project/branch/master/graph/badge.svg)](https://codecov.io/gh/lefticus/cpp_starter_project)
+[![codecov](https://codecov.io/gh/ruguevara/star-ultra/branch/master/graph/badge.svg)](https://codecov.io/gh/ruguevara/star-ultra)
 
-[![Build Status](https://travis-ci.org/lefticus/cpp_starter_project.svg?branch=master)](https://travis-ci.org/lefticus/cpp_starter_project)
+[![Build Status](https://travis-ci.org/ruguevara/star-ultra.svg?branch=master)](https://travis-ci.org/ruguevara/star-ultra)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ro4lbfoa7n0sy74c/branch/master?svg=true)](https://ci.appveyor.com/project/lefticus/cpp-starter-project/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/ro4lbfoa7n0sy74c/branch/master?svg=true)](https://ci.appveyor.com/project/ruguevara/star-ultra/branch/master)
 
-![CMake](https://github.com/lefticus/cpp_starter_project/workflows/CMake/badge.svg)
+![CMake](https://github.com/ruguevara/star-ultra/workflows/CMake/badge.svg)
 
 
-## Getting Started
-
-### Use the Github template
-First, click the green `Use this template` button near the top of this page.
-This will take you to Github's ['Generate Repository'](https://github.com/lefticus/cpp_starter_project/generate) page.
-Fill in a repository name and short description, and click 'Create repository from template'.
-This will allow you to create a new repository in your Github account,
-prepopulated with the contents of this project.
-Now you can clone the project locally and get to work!
-
-    $ git clone https://github.com/<user>/<your_new_repo>.git
+## C++ Starter Template Getting Started
 
 ### Remove frameworks you're not going to use
+
 If you know you're not going to use one or more of the optional gui/graphics
 frameworks (fltk, gtkmm, imgui, etc.), you can remove them with `git rm`:
 
@@ -30,11 +21,13 @@ frameworks (fltk, gtkmm, imgui, etc.), you can remove them with `git rm`:
 ## Dependencies
 
 Note about install commands:
+
 - for Windows, we use [choco](https://chocolatey.org/install).
 - for MacOS, we use [brew](https://brew.sh/).
 - In case of an error in cmake, make sure that the dependencies are on the PATH.
 
 ### Necessary Dependencies
+
 1. A C++ compiler that supports C++17.
 See [cppreference.com](https://en.cppreference.com/w/cpp/compiler_support)
 to see which features are supported by each compiler.
